@@ -39,20 +39,30 @@
 
     /* HERO / LOGO */
     .vacutrac-hero {
-      background-color: #ffffff; padding: 60px 40px 80px;
-      text-align: center; min-height: 480px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background-color: #ffffff;
+      padding: 40px 40px 60px;
     }
-    .vacutrac-logo-area { margin-bottom: 24px; }
-    .vacutrac-logo-area img { max-height: 280px; margin: 0 auto; }
-    .vacutrac-logo-placeholder {
-      width: 700px; max-width: 100%; height: 260px;
-      background: linear-gradient(135deg, #f2d0c4 0%, #e8a090 50%, #d4897a 100%);
-      border-radius: 20px; display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.7); font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; font-weight: 600;
+    .vacutrac-hero-inner {
+      display: flex;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    .vacutrac-hero .subtitle { font-size: 1.05rem; font-weight: 400; color: #333; max-width: 700px; margin-top: 10px; }
+    .vacutrac-logo-area {
+      flex: 0 0 auto;
+    }
+    .vacutrac-logo-area img {
+      max-height: 400px;
+    }
+    .vacutrac-hero-text {
+      padding-left: 20px;
+    }
+    .vacutrac-hero .subtitle {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 6px;
+    }
 
     /* MISSION (black angled) */
     .mission-section {
@@ -197,11 +207,15 @@
 
   <!-- HERO / LOGO -->
   <section class="vacutrac-hero">
-    <div class="vacutrac-logo-area">
-      <!-- REPLACE: <img src="images/vacutrac-logo.png" alt="VacuTrac Logo"> -->
-      <div class="vacutrac-logo-placeholder">VacuTrac</div>
+    <div class="vacutrac-hero-inner">
+      <div class="vacutrac-logo-area">
+        <img src="images/vacutrac-logo.png" alt="VacuTrac Logo">
+      </div>
+      <div class="vacutrac-hero-text">
+        <p class="subtitle">Novel Integrated Tissue Retraction and Suction Device for Spinal Surgery; Patent Pending</p>
+        <p class="subtitle">Willy Revolution Award for Outstanding Innovation – Second Place</p>
+      </div>
     </div>
-    <p class="subtitle">Novel Integrated Tissue Retraction and Suction Device for Spinal Surgery; Patent Pending</p>
   </section>
 
   <!-- MISSION -->
