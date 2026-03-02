@@ -192,11 +192,13 @@
        ============================================ */
     .device-image-section {
       background-color: #ffffff;
-      padding: 60px 40px 40px;
+      padding: 60px 40px 0;
       text-align: center;
+      position: relative;
     }
 
-    .device-image-section img {
+    .device-image-section img,
+    .device-image-section video {
       max-width: 700px;
       margin: 0 auto;
     }
@@ -221,7 +223,9 @@
        ============================================ */
     .description-section {
       background-color: #ffffff;
-      padding: 40px 40px 100px;
+      padding: 0 40px 100px;
+      position: relative;
+      margin-top: -200px;
     }
 
     .description-inner {
@@ -553,14 +557,11 @@
 
   <!-- ========== DEVICE IMAGE (exploded view / GIF) ========== -->
   <section class="device-image-section">
-    <!--
-      REPLACE with your looping GIF or image:
-      <img src="images/vacutrac-exploded.gif" alt="VacuTrac device exploded view">
-    -->
-    <div class="device-image-placeholder">Replace with device GIF / image</div>
+    <video autoplay loop muted playsinline>
+      <source src="images/vacutrac-exploded.mp4" type="video/mp4">
+    </video>
   </section>
 
-  <!-- ========== DESCRIPTION + ACCORDION ========== -->
   <section class="description-section">
     <div class="description-inner">
       <div class="description-text">
