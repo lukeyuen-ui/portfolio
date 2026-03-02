@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VacuTrac Surgical — Luke Yuen's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      background-color: #e8e8e8;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================
+       NAVIGATION (same as index.html)
+       ============================================ */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #1a1a1a;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* ============================================
+       HERO / LOGO SECTION
+       ============================================ */
+    .vacutrac-hero {
+      background-color: #ffffff;
+      padding: 60px 40px 80px;
+      text-align: center;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vacutrac-logo-area {
+      margin-bottom: 24px;
+    }
+
+    /* Placeholder for the VacuTrac logo image */
+    .vacutrac-logo-area img {
+      max-height: 280px;
+      margin: 0 auto;
+    }
+
+    .vacutrac-logo-placeholder {
+      width: 700px;
+      max-width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, #f2d0c4 0%, #e8a090 50%, #d4897a 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .vacutrac-hero .subtitle {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #333;
+      max-width: 700px;
+      margin-top: 10px;
+    }
+
+    /* ============================================
+       MISSION STATEMENT (black angled section)
+       ============================================ */
+    .mission-section {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      padding: 100px 40px 120px;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+    }
+
+    .mission-section p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      letter-spacing: 0.01em;
+    }
+
+    /* ============================================
+       DEVICE IMAGE SECTION
+       ============================================ */
+    .device-image-section {
+      background-color: #ffffff;
+      padding: 60px 40px 40px;
+      text-align: center;
+    }
+
+    .device-image-section img {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .device-image-placeholder {
+      width: 700px;
+      max-width: 100%;
+      height: 500px;
+      background-color: #f5f5f5;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.2);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================
+       DESCRIPTION + ACCORDION SECTION
+       ============================================ */
+    .description-section {
+      background-color: #ffffff;
+      padding: 40px 40px 100px;
+    }
+
+    .description-inner {
+      display: flex;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    .description-text {
+      flex: 1;
+    }
+
+    .description-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .accordion-panel {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .accordion-item {
+      border-top: 1px solid #d0d0d0;
+    }
+
+    .accordion-item:last-child {
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #1a1a1a;
+    }
+
+    .accordion-header:hover {
+      opacity: 0.7;
+    }
+
+    .accordion-icon {
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    .accordion-item.open .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+
+    .accordion-body p {
+      font-size: 1rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: #333;
+    }
+
+    /* ============================================
+       PATENT PENDING SECTION
+       ============================================ */
+    .patent-section {
+      background-color: #f0f0f0;
+      padding: 80px 40px;
+    }
+
+    .patent-inner {
+      display: flex;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    .patent-inner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 500;
+      flex: 0 0 auto;
+      letter-spacing: -0.02em;
+    }
+
+    .patent-inner p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: #333;
+      max-width: 550px;
+      padding-top: 10px;
+    }
+
+    /* ============================================
+       VIDEO SECTION
+       ============================================ */
+    .video-section {
+      background-color: #f0f0f0;
+      padding: 20px 40px 80px;
+    }
+
+    .video-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Placeholder for video */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .video-placeholder .play-btn {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-placeholder .play-btn::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 22px solid #fff;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      margin-left: 5px;
+    }
+
+    .video-placeholder span {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+    }
+
+    /* ============================================
+       POSTER SECTION
+       ============================================ */
+    .poster-section {
+      background-color: #f0f0f0;
+      padding: 0 40px 80px;
+    }
+
+    .poster-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .poster-wrapper img {
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .poster-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1a3a5c 0%, #2a4a6c 50%, #1a3a5c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      padding: 40px;
+      text-align: center;
+      background-color: #e8e8e8;
+      font-size: 0.85rem;
+      color: #777;
+      border-top: 1px solid #d0d0d0;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #e8e8e8;
+        flex-direction: column;
+        padding: 20px 40px;
+        gap: 16px;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-mobile-toggle {
+        display: block;
+      }
+
+      .description-inner {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .accordion-panel {
+        max-width: 100%;
+      }
+
+      .patent-inner {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .mission-section {
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+        padding: 60px 20px 80px;
+      }
+
+      .vacutrac-hero,
+      .device-image-section,
+      .description-section,
+      .patent-section,
+      .video-section,
+      .poster-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .nav {
+        padding: 16px 20px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .vacutrac-logo-placeholder {
+        height: 180px;
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vacutrac.html" class="active">VacuTrac Surgical</a></li>
+      <li><a href="mdanderson.html">MD Anderson</a></li>
+      <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
+      <li><a href="engineering-design.html">Engineering Design</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== HERO / LOGO ========== -->
+  <section class="vacutrac-hero">
+    <div class="vacutrac-logo-area">
+      <!--
+        REPLACE: <img src="images/vacutrac-logo.png" alt="VacuTrac Logo">
+      -->
+      <div class="vacutrac-logo-placeholder">VacuTrac</div>
+    </div>
+    <p class="subtitle">Novel Integrated Tissue Retraction and Suction Device for Spinal Surgery; Patent Pending</p>
+  </section>
+
+  <!-- ========== MISSION STATEMENT ========== -->
+  <section class="mission-section">
+    <p>
+      We aim to create a one-handed instrument that allows surgeons to retract
+      muscle and suction blood simultaneously thereby reducing the surgeon's
+      physical and mental fatigue, the number of personnel required to perform the
+      procedure, and the time under anesthesia for elderly patients.
+    </p>
+  </section>
+
+  <!-- ========== DEVICE IMAGE (exploded view / GIF) ========== -->
+  <section class="device-image-section">
+    <!--
+      REPLACE with your looping GIF or image:
+      <img src="images/vacutrac-exploded.gif" alt="VacuTrac device exploded view">
+    -->
+    <div class="device-image-placeholder">Replace with device GIF / image</div>
+  </section>
+
+  <!-- ========== DESCRIPTION + ACCORDION ========== -->
+  <section class="description-section">
+    <div class="description-inner">
+      <div class="description-text">
+        <h2>VacuTrac is a handheld suction device that enables surgeons to control three tools with two hands</h2>
+      </div>
+      <div class="accordion-panel">
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Challenge</span>
+            <span class="accordion-icon">&#8744;</span>
+          </button>
+          <div class="accordion-body">
+            <p>Surgeons require multiple tools to achieve exposure and suction simultaneously—complicating procedures and requiring additional hands in the OR.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Solution</span>
+            <span class="accordion-icon">&#8744;</span>
+          </button>
+          <div class="accordion-body">
+            <p>We engineered a handheld device that integrates controlled suction with a stable, ergonomic grip—freeing one hand without compromising performance.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Result</span>
+            <span class="accordion-icon">&#8744;</span>
+          </button>
+          <div class="accordion-body">
+            <p>By simplifying tool transitions and improving intraoperative efficiency, VacuTrac offers a scalable solution to support solo or minimally assisted procedures.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PATENT PENDING ========== -->
+  <section class="patent-section">
+    <div class="patent-inner">
+      <h2>Patent Pending.</h2>
+      <p>
+        A provisional patent has been filed for this design, recognizing its
+        originality and potential for clinical impact. This status marks an exciting
+        step toward future development and commercialization.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== VIDEO ========== -->
+  <section class="video-section">
+    <div class="video-wrapper">
+      <!--
+        REPLACE with your video:
+        <video controls poster="images/surgery-thumbnail.jpg">
+          <source src="videos/vacutrac-surgery.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      -->
+      <div class="video-placeholder">
+        <div class="play-btn"></div>
+        <span>Replace with your video file (01:31)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESEARCH POSTER ========== -->
+  <section class="poster-section">
+    <div class="poster-wrapper">
+      <!--
+        REPLACE: <img src="images/vacutrac-poster.png" alt="VacuTrac Research Poster">
+      -->
+      <div class="poster-placeholder">Replace with research poster image</div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    &copy; 2025 Luke Yuen. All rights reserved.
+  </footer>
+
+  <!-- ========== ACCORDION SCRIPT ========== -->
+  <script>
+    function toggleAccordion(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+
+      // Close all items
+      document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('open');
+      });
+
+      // If it wasn't open, open it
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>

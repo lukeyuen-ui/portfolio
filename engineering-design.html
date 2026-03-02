@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Design Minor — Luke Yuen's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      background-color: #e8e8e8;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+    }
+
+    .nav-logo a { text-decoration: none; color: inherit; }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #ffffff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #ffffff;
+      margin: 5px 0;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Placeholder for hero background */
+    .hero-bg-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #5a7a9a 0%, #7a9ab0 30%, #8aaa c0 60%, #6a8a a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      padding: 0 60px;
+      color: #ffffff;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    /* ========== COURSES SECTION ========== */
+    .courses-section {
+      background-color: #ffffff;
+      padding: 80px 40px;
+    }
+
+    .courses-section > h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 500;
+      margin-bottom: 50px;
+      letter-spacing: -0.01em;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .course-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .course-card-image .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .course-card h3 {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .course-card p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      font-weight: 300;
+      color: #333;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .course-card .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border: 1px solid #1a1a1a;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .course-card .btn:hover {
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 40px;
+      text-align: center;
+      background-color: #e8e8e8;
+      font-size: 0.85rem;
+      color: #777;
+      border-top: 1px solid #d0d0d0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.85);
+        flex-direction: column;
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: block; }
+
+      .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .hero-text {
+        padding: 0 30px;
+      }
+
+      .nav { padding: 16px 20px; }
+      .courses-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION (overlaid on hero) ========== -->
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vacutrac.html">VacuTrac Surgical</a></li>
+      <li><a href="mdanderson.html">MD Anderson</a></li>
+      <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
+      <li><a href="engineering-design.html" class="active">Engineering Design</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <!--
+      REPLACE the placeholder with your Rice University campus photo:
+      <img class="hero-bg" src="images/rice-campus.jpg" alt="Rice University campus">
+    -->
+    <div class="hero-bg-placeholder">Replace with Rice campus image</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Blending creativity and engineering, the EDES minor equips students to turn bold ideas into tangible, human-centered solutions</h1>
+    </div>
+  </section>
+
+  <!-- ========== COURSES ========== -->
+  <section class="courses-section">
+    <h2>Engineering Design Minor</h2>
+
+    <div class="courses-grid">
+
+      <!-- EDES 120 -->
+      <div class="course-card">
+        <div class="course-card-image">
+          <!--
+            REPLACE: <img src="images/edes120.jpg" alt="Hamstring Stretch Device">
+          -->
+          <div class="placeholder">EDES 120 image</div>
+        </div>
+        <h3>EDES 120: Hamstring Stretch Device</h3>
+        <p>
+          Designed for pediatric cerebral palsy patients, this device assists physical therapists
+          by automating the repetitive hamstring stretch motion. Our team developed and tested
+          multiple prototypes—ranging from low-fidelity cardboard models to a full hydraulic
+          system—refining comfort, portability, and adjustability along the way. Built for
+          function, ease of use, and user-centered care, the final prototype reduces therapist
+          fatigue while improving patient outcomes.
+        </p>
+        <a class="btn" href="https://docs.google.com/presentation/d/1NcIUFufvHfldiCGxaZYdPOiYvKhHDZ9TqtkFwvUid_Y/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Learn More</a>
+      </div>
+
+      <!-- EDES 200 -->
+      <div class="course-card">
+        <div class="course-card-image">
+          <!--
+            REPLACE: <img src="images/edes200.jpg" alt="Negative Pressure Wound Therapy">
+          -->
+          <div class="placeholder">EDES 200 image</div>
+        </div>
+        <h3>EDES 200: Negative Pressure Wound Therapy</h3>
+        <p>
+          Our team designed a portable, low-cost negative pressure wound therapy (NPWT) device
+          to support safe, at-home recovery for patients in low-resource settings. The system
+          promotes wound healing through controlled suction, with an intuitive touchscreen
+          interface and layered design for sanitation, safety, and extended use. Built with
+          affordability and autonomy in mind, it's a step toward expanding access to essential
+          wound care.
+        </p>
+        <a class="btn" href="https://docs.google.com/presentation/d/1qAZGjT1HSIEPyzmnyzr4oQ38835mO9DhV7hArSzuj30/edit" target="_blank" rel="noopener">Learn More</a>
+      </div>
+
+      <!-- EDES 210 -->
+      <div class="course-card">
+        <div class="course-card-image">
+          <!--
+            REPLACE: <img src="images/edes210.jpg" alt="Prototyping and Fabrication">
+          -->
+          <div class="placeholder">EDES 210 image</div>
+        </div>
+        <h3>EDES 210: Prototyping and Fabrication</h3>
+        <p>
+          This course is about turning ideas into real, physical objects. From laser cutting and
+          3D printing to CNC machining and casting, we learned hands-on skills while building
+          increasingly complex prototypes. Guided by peer feedback and an apprenticeship model,
+          this was more than a class—it was a crash course in becoming a confident, capable maker.
+        </p>
+        <a class="btn" href="https://engi210.blogs.rice.edu/author/lty2/" target="_blank" rel="noopener">See More</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    &copy; 2025 Luke Yuen. All rights reserved.
+  </footer>
+
+</body>
+</html>

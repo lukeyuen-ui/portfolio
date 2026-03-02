@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rice Computational Imaging Lab — Luke Yuen's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      background-color: #e8e8e8;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo a { text-decoration: none; color: inherit; }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #1a1a1a;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      margin: 5px 0;
+    }
+
+    /* ========== PROJECT ROW ========== */
+    .project-row {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .project-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .project-text {
+      flex: 1;
+    }
+
+    .project-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .project-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: #333;
+    }
+
+    .project-image {
+      flex: 0 0 420px;
+      max-width: 420px;
+    }
+
+    .project-image img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .project-image .placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #c8c8c8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+    }
+
+    /* Divider between projects */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid #d0d0d0;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 40px;
+      text-align: center;
+      background-color: #e8e8e8;
+      font-size: 0.85rem;
+      color: #777;
+      border-top: 1px solid #d0d0d0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #e8e8e8;
+        flex-direction: column;
+        padding: 20px 40px;
+        gap: 16px;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: block; }
+
+      .project-row,
+      .project-row.reverse {
+        flex-direction: column;
+        padding: 50px 20px;
+        gap: 30px;
+      }
+
+      .project-image {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .nav { padding: 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vacutrac.html">VacuTrac Surgical</a></li>
+      <li><a href="mdanderson.html">MD Anderson</a></li>
+      <li><a href="imaging-lab.html" class="active">Rice Computational Imaging Lab</a></li>
+      <li><a href="engineering-design.html">Engineering Design</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== THEMIS ========== -->
+  <div class="project-row">
+    <div class="project-text">
+      <h2>THEMIS</h2>
+      <p>
+        THEMIS is a wearable blood pressure monitoring device designed to address
+        bias in traditional sensing technologies, particularly for individuals with
+        higher BMIs and darker skin tones. Named after the Greek goddess of fairness
+        and justice, THEMIS reflects our commitment to equitable healthcare through
+        inclusive design. By combining ergonomic hardware with custom-calibrated
+        sensing, the device aims to deliver more accurate, representative data for
+        underrepresented patient populations.
+      </p>
+    </div>
+    <div class="project-image">
+      <!--
+        REPLACE: <img src="images/themis-render.png" alt="THEMIS wearable device">
+      -->
+      <div class="placeholder">THEMIS render</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ========== LSCI ========== -->
+  <div class="project-row reverse">
+    <div class="project-text">
+      <h2>LSCI</h2>
+      <p>
+        LSCI is a laser speckle contrast imaging system designed to visualize
+        real-time blood flow during reconstructive surgeries. Built as part of a
+        multidisciplinary team, I contributed to the mechanical design of the
+        enclosure and mounting system, and helped optimize the optical focal length
+        between the laser and lens for clearer imaging. The system offers surgeons
+        a compact, cost-effective alternative to traditional perfusion monitoring
+        tools.
+      </p>
+    </div>
+    <div class="project-image">
+      <!--
+        REPLACE: <img src="images/lsci-render.png" alt="LSCI imaging system">
+      -->
+      <div class="placeholder">LSCI render</div>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    &copy; 2025 Luke Yuen. All rights reserved.
+  </footer>
+
+</body>
+</html>

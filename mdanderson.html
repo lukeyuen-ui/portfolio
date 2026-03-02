@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MD Anderson Cancer Center — Luke Yuen's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      background-color: #e8e8e8;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo a { text-decoration: none; color: inherit; }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #1a1a1a;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a1a;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* ========== IDEAS LAB INTRO ========== */
+    .intro-section {
+      background-color: #d8d8d8;
+      padding: 80px 40px 120px;
+      position: relative;
+    }
+
+    .intro-inner {
+      display: flex;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .intro-text {
+      flex: 1;
+    }
+
+    .intro-text .label {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .intro-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 400;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+
+    .intro-logo {
+      flex: 0 0 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .intro-logo img {
+      max-width: 100%;
+    }
+
+    /* Placeholder for MD Anderson logo */
+    .intro-logo .placeholder {
+      width: 350px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ========== ANGLED DIVIDER ========== */
+    .angle-divider {
+      width: 100%;
+      height: 80px;
+      background-color: #d8d8d8;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========== IMAGE GALLERY ========== */
+    .gallery-section {
+      background-color: #ffffff;
+      padding: 0 40px 40px;
+    }
+
+    .gallery-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-grid-2col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-grid-2col .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .gallery-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      max-width: 1400px;
+      margin: 16px auto 0;
+    }
+
+    .gallery-grid-2x2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-grid-2x2 .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .gallery-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 1400px;
+      margin: 16px auto 0;
+    }
+
+    .gallery-bottom img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-bottom .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 40px;
+      text-align: center;
+      background-color: #e8e8e8;
+      font-size: 0.85rem;
+      color: #777;
+      border-top: 1px solid #d0d0d0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #e8e8e8;
+        flex-direction: column;
+        padding: 20px 40px;
+        gap: 16px;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: block; }
+
+      .intro-inner {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .intro-logo {
+        flex: none;
+        width: 100%;
+      }
+
+      .intro-logo .placeholder {
+        width: 100%;
+      }
+
+      .gallery-grid-2col,
+      .gallery-grid-2x2,
+      .gallery-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-section,
+      .gallery-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .nav { padding: 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vacutrac.html">VacuTrac Surgical</a></li>
+      <li><a href="mdanderson.html" class="active">MD Anderson</a></li>
+      <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
+      <li><a href="engineering-design.html">Engineering Design</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== IDEAS LAB INTRO ========== -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <div class="intro-text">
+        <div class="label">The Ideas Lab</div>
+        <p>
+          At the MD Anderson IDEAS Lab, an innovation hub focused on surgical and
+          patient care challenges, I collaborated with Krystal Kimiagaree under the
+          direction of Dr. Justin Bird and Mrs. Savannah Esteve Morreale. Our work
+          centered on solving retraction-related discomfort in orthopedic oncology
+          surgeries by designing more ergonomic, surgeon-friendly tool interfaces.
+          This experience deepened my understanding of clinical needs and
+          demonstrated how thoughtful mechanical design can improve both surgeon
+          performance and patient outcomes.
+        </p>
+      </div>
+      <div class="intro-logo">
+        <!--
+          REPLACE: <img src="images/mdanderson-logo.png" alt="MD Anderson Cancer Center">
+        -->
+        <div class="placeholder">MD Anderson Logo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ANGLED DIVIDER ========== -->
+  <div class="angle-divider"></div>
+
+  <!-- ========== IMAGE GALLERY ========== -->
+  <section class="gallery-section">
+
+    <!-- Row 1: 2 images side by side -->
+    <div class="gallery-grid-2col">
+      <!--
+        REPLACE: <img src="images/mda-surgery.jpg" alt="Surgery observation">
+      -->
+      <div class="img-placeholder">Surgery photo</div>
+      <!--
+        REPLACE: <img src="images/mda-cad-renders.jpg" alt="CAD renders of retractor">
+      -->
+      <div class="img-placeholder">CAD renders</div>
+    </div>
+
+    <!-- Row 2: 2x2 grid of process photos -->
+    <div class="gallery-grid-2x2">
+      <!--
+        REPLACE each placeholder with:
+        <img src="images/mda-retractor.jpg" alt="Retractor closeup">
+        <img src="images/mda-mold.jpg" alt="Mold and prototype">
+        <img src="images/mda-workspace.jpg" alt="Workspace">
+        <img src="images/mda-fitting.jpg" alt="Prototype fitting">
+      -->
+      <div class="img-placeholder">Retractor closeup</div>
+      <div class="img-placeholder">Mold &amp; prototype</div>
+      <div class="img-placeholder">Workspace</div>
+      <div class="img-placeholder">Prototype fitting</div>
+    </div>
+
+    <!-- Row 3: 2 more images -->
+    <div class="gallery-bottom">
+      <!--
+        REPLACE:
+        <img src="images/mda-glove-test.jpg" alt="Glove prototype test">
+        <img src="images/mda-hand-cast.jpg" alt="Hand casting process">
+      -->
+      <div class="img-placeholder">Glove prototype test</div>
+      <div class="img-placeholder">Hand casting process</div>
+    </div>
+
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    &copy; 2025 Luke Yuen. All rights reserved.
+  </footer>
+
+</body>
+</html>
