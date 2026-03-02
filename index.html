@@ -3,23 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luke Yuen's Portfolio</title>
+  <title>Contact — Luke Yuen's Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ============================================
-       RESET & BASE
-       ============================================ */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Source Sans 3', sans-serif;
@@ -30,19 +20,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* ============================================
-       NAVIGATION
-       ============================================ */
+    /* ========== NAVIGATION ========== */
     .nav {
       display: flex;
       align-items: center;
@@ -61,17 +42,14 @@
       letter-spacing: 0.02em;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
+    .nav-logo a { text-decoration: none; color: inherit; }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
 
     .nav-links a {
       font-size: 0.9rem;
       font-weight: 400;
       letter-spacing: 0.01em;
-      transition: opacity 0.2s ease;
       position: relative;
     }
 
@@ -86,16 +64,13 @@
       transition: width 0.3s ease;
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+    .nav-links a:hover::after { width: 100%; }
 
     .nav-links a.active {
       text-decoration: underline;
       text-underline-offset: 4px;
     }
 
-    /* Mobile menu button */
     .nav-mobile-toggle {
       display: none;
       background: none;
@@ -110,229 +85,170 @@
       height: 2px;
       background: #1a1a1a;
       margin: 5px 0;
-      transition: 0.3s;
     }
 
-    /* ============================================
-       HERO SECTION
-       ============================================ */
-    .hero {
-      position: relative;
-      margin: 0 40px;
-      border-radius: 0;
-      overflow: hidden;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-      font-weight: 500;
-      line-height: 1.1;
-      padding: 40px 40px 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-image-wrapper {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      overflow: hidden;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.5);
-    }
-
-    /* Placeholder for hero image — replace src with your actual image */
-    .hero-image-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 40%, #1a1a1a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.15);
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .hero-overlay-text {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 60px 50px;
-      max-width: 550px;
-      color: #ffffff;
-      font-size: 1.05rem;
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    /* ============================================
-       FEATURED PROJECTS
-       ============================================ */
-    .projects-section {
-      padding: 80px 40px;
-      background-color: #f0f0f0;
-      margin-top: 2px;
-    }
-
-    .projects-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 500;
-      text-align: center;
-      margin-bottom: 50px;
-      letter-spacing: -0.01em;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .project-card {
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .project-image-circle {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #c8c8c8;
-      margin: 0 auto 20px;
-      max-width: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .project-image-circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Placeholder styling — remove when using real images */
-    .project-image-circle .placeholder {
-      font-size: 0.75rem;
-      color: rgba(0,0,0,0.25);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .project-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .project-card p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: #555;
-    }
-
-    /* ============================================
-       ABOUT SECTION
-       ============================================ */
-    .about-section {
-      padding: 80px 40px;
-      background-color: #f0f0f0;
-    }
-
-    .about-inner {
+    /* ========== CONTACT LAYOUT ========== */
+    .contact-section {
       display: flex;
       gap: 60px;
-      max-width: 1000px;
+      padding: 60px 40px 80px;
+      max-width: 1400px;
       margin: 0 auto;
       align-items: flex-start;
     }
 
-    .about-photo {
-      flex: 0 0 300px;
-      width: 300px;
-      height: 380px;
-      overflow: hidden;
+    .contact-left {
+      flex: 1;
+    }
+
+    .contact-right {
+      flex: 0 0 480px;
+      max-width: 480px;
+    }
+
+    .contact-right img {
+      width: 100%;
+      height: auto;
+    }
+
+    .contact-right .placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
       background-color: #c8c8c8;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .about-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .about-photo .placeholder {
-      font-size: 0.75rem;
-      color: rgba(0,0,0,0.25);
+      color: rgba(0,0,0,0.15);
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
-    .about-content {
-      flex: 1;
-    }
-
-    .about-content h2 {
+    /* ========== CONTACT CONTENT ========== */
+    .contact-left h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
       font-weight: 500;
       margin-bottom: 24px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
     }
 
-    .about-content p {
-      font-size: 1rem;
+    .contact-left .intro {
+      font-size: 1.05rem;
       line-height: 1.7;
       font-weight: 300;
       color: #333;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
-    .about-buttons {
-      display: flex;
-      gap: 20px;
+    .contact-info {
+      margin-bottom: 50px;
     }
 
-    .about-buttons a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 50px;
-      border: 1px solid #1a1a1a;
-      font-size: 0.95rem;
+    .contact-info a {
+      display: block;
+      font-size: 1rem;
       font-weight: 400;
-      letter-spacing: 0.02em;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-bottom: 4px;
     }
 
-    .about-buttons a:hover {
+    .contact-info a:hover {
+      opacity: 0.7;
+    }
+
+    .contact-info span {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #1a1a1a;
+    }
+
+    /* ========== FORM ========== */
+    .contact-form label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .contact-form label .req {
+      font-weight: 300;
+      color: #777;
+      font-size: 0.85rem;
+    }
+
+    .name-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .name-row .field {
+      flex: 1;
+    }
+
+    .name-row .field-label {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #555;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #1a1a1a;
+      background: transparent;
+      padding: 8px 0;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-bottom-color: #555;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .contact-form button {
+      display: inline-block;
+      padding: 12px 30px;
+      border: 1px solid #1a1a1a;
+      background: transparent;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .contact-form button:hover {
       background-color: #1a1a1a;
       color: #fff;
     }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
+    /* ========== FOOTER ========== */
     .footer {
       padding: 40px;
       text-align: center;
@@ -342,9 +258,7 @@
       border-top: 1px solid #d0d0d0;
     }
 
-    /* ============================================
-       RESPONSIVE
-       ============================================ */
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -359,71 +273,27 @@
         border-bottom: 1px solid #d0d0d0;
       }
 
-      .nav-links.open {
-        display: flex;
-      }
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: block; }
 
-      .nav-mobile-toggle {
-        display: block;
-      }
-
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-      }
-
-      .about-inner {
+      .contact-section {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        padding: 40px 20px 60px;
       }
 
-      .about-photo {
+      .contact-right {
         flex: none;
-        width: 250px;
-        height: 310px;
+        max-width: 100%;
+        width: 100%;
       }
 
-      .about-buttons {
-        justify-content: center;
-      }
-
-      .hero-title {
-        padding: 30px 20px 16px;
-      }
-
-      .hero-overlay-text {
-        padding: 30px;
-        font-size: 0.95rem;
-      }
-
-      .hero {
-        margin: 0 20px;
-      }
-
-      .nav {
-        padding: 16px 20px;
-      }
-
-      .projects-section,
-      .about-section {
-        padding: 60px 20px;
-      }
+      .nav { padding: 16px 20px; }
     }
 
     @media (max-width: 550px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-        max-width: 280px;
-      }
-
-      .hero-image-wrapper {
-        height: 350px;
-      }
-
-      .about-buttons {
+      .name-row {
         flex-direction: column;
-        gap: 12px;
+        gap: 20px;
       }
     }
   </style>
@@ -432,128 +302,72 @@
 
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav">
-    <div class="nav-logo">Luke Yuen's Portfolio</div>
+    <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
     <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="vacutrac.html">VacuTrac Surgical</a></li>
       <li><a href="mdanderson.html">MD Anderson</a></li>
       <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
       <li><a href="engineering-design.html">Engineering Design</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ========== HERO SECTION ========== -->
-  <section class="hero">
-    <h1 class="hero-title">Innovative Solutions in Mechanical Engineering</h1>
-    <div class="hero-image-wrapper">
+  <!-- ========== CONTACT ========== -->
+  <section class="contact-section">
+
+    <div class="contact-left">
+      <h1>Contact</h1>
+      <p class="intro">
+        Whether you're hiring, exploring potential partnerships, or simply
+        interested in learning more about my work, I'd love to hear from you.
+        Please feel free to reach out by email or phone—I'm always open to new
+        opportunities.
+      </p>
+
+      <div class="contact-info">
+        <a href="mailto:luke.yuen@gmail.com">luke.yuen@gmail.com</a>
+        <span>(650) 260-5853</span>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/xnjbkdwv" method="POST">
+        <label>Name</label>
+        <div class="name-row">
+          <div class="field">
+            <span class="field-label">First Name <span class="req">(required)</span></span>
+            <input type="text" name="first-name" required>
+          </div>
+          <div class="field">
+            <span class="field-label">Last Name <span class="req">(required)</span></span>
+            <input type="text" name="last-name" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email <span class="req">(required)</span></label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Message <span class="req">(required)</span></label>
+          <textarea name="message" rows="3" required></textarea>
+        </div>
+
+        <button type="submit">SEND</button>
+      </form>
+    </div>
+
+    <div class="contact-right">
       <!--
-        REPLACE THIS: Swap the placeholder div below with your hero image:
-        <img class="hero-image" src="images/hero.jpg" alt="Engineering workspace">
+        REPLACE: <img src="images/hand-render.jpg" alt="Robotic hand render">
       -->
-      <!-- <div class="hero-image-placeholder">Replace with your hero image</div> -->
-      <img class="hero-image" src="images/hero.jpg" alt="Engineering workspace">
-
-      <div class="hero-overlay-text">
-        This collection showcases a range of projects that reflect my passion for
-        mechanical design, prototyping, and hands-on problem solving. From classwork
-        and independent research to industry collaborations, each project highlights
-        a different facet of my engineering journey. Whether iterating on a concept
-        or refining a final prototype, I approach every challenge with curiosity,
-        precision, and a drive to create meaningful, functional solutions.
-      </div>
+      <div class="placeholder">Project image</div>
     </div>
-  </section>
 
-  <!-- ========== FEATURED PROJECTS ========== -->
-  <section class="projects-section">
-    <h2>Featured Projects</h2>
-    <div class="projects-grid">
-
-      <a class="project-card" href="vacutrac.html">
-        <!-- <div class="project-image-circle"> -->
-        <img src="images/project-vacutrac.png" alt="VacuTrac Surgical">
-          <!--
-            REPLACE: <img src="images/project-vacutrac.png" alt="VacuTrac Surgical">
-          -->
-          <span class="placeholder">Project Image</span>
-        </div>
-        <h3>Rice Senior Design</h3>
-        <p>VacuTrac Surgical LLC</p>
-      </a>
-
-      <a class="project-card" href="mdanderson.html">
-        <!-- <div class="project-image-circle"> -->
-        <img src="images/project-mdanderson.png" alt="MD Anderson">
-          <!--
-            REPLACE: <img src="images/project-mdanderson.png" alt="MD Anderson">
-          -->
-          <span class="placeholder">Project Image</span>
-        </div>
-        <h3>MD Anderson Cancer Center</h3>
-        <p>Retractor Discomfort Remedy</p>
-      </a>
-
-      <a class="project-card" href="imaging-lab.html">
-        <!-- <div class="project-image-circle"> -->
-        <img src="images/project-imaging.png" alt="Computational Imaging Lab">
-          <!--
-            REPLACE: <img src="images/project-imaging.png" alt="Computational Imaging Lab">
-          -->
-          <span class="placeholder">Project Image</span>
-        </div>
-        <h3>Computational Imaging Lab</h3>
-        <p>Wearable Medical Devices</p>
-      </a>
-
-      <a class="project-card" href="engineering-design.html">
-        <!-- <div class="project-image-circle"> -->
-        <img src="images/project-engdesign.png" alt="Engineering Design Minor">
-          <!--
-            REPLACE: <img src="images/project-engdesign.png" alt="Engineering Design Minor">
-          -->
-          <span class="placeholder">Project Image</span>
-        </div>
-        <h3>Engineering Design Minor</h3>
-        <p>Human-Centered Engineering</p>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- ========== ABOUT SECTION ========== -->
-  <section class="about-section" id="about">
-    <div class="about-inner">
-      <!-- <div class="about-photo"> -->
-      <img src="images/luke-portrait.jpg" alt="Luke Yuen">
-        <!--
-          REPLACE: <img src="images/luke-portrait.jpg" alt="Luke Yuen">
-        -->
-        <span class="placeholder">Portrait Photo</span>
-      </div>
-      <div class="about-content">
-        <h2>About</h2>
-        <p>
-          Luke Yuen is an incoming Master of Science candidate in Mechanical
-          Engineering at Stanford University. He is currently completing his
-          undergraduate degree in Mechanical Engineering with a minor in
-          Engineering Design at Rice University. Luke has a strong interest in
-          rapid prototyping, hands-on fabrication, and the development of
-          innovative mechanical systems. His work blends technical precision
-          with creative problem-solving, reflecting a commitment to building
-          thoughtful, functional designs across a range of engineering
-          applications.
-        </p>
-        <div class="about-buttons">
-          <a href="https://www.linkedin.com/in/lukeyuen/" target="_blank" rel="noopener">Linkedin</a>
-          <a href="contact.html">Contact</a>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ========== FOOTER ========== -->
