@@ -172,7 +172,7 @@
       padding: 0 40px 40px;
     }
 
-    .gallery-grid-2col {
+    .gallery-row-1 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
@@ -180,54 +180,25 @@
       margin: 0 auto;
     }
 
-    .gallery-grid-2col img {
+    .gallery-row-1 .gallery-tall {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .gallery-grid-2col .img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background-color: #e0e0e0;
+    .gallery-row-1 .gallery-stack {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.15);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .gallery-grid-2x2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      flex-direction: column;
       gap: 16px;
-      max-width: 1400px;
-      margin: 16px auto 0;
     }
 
-    .gallery-grid-2x2 img {
+    .gallery-row-1 .gallery-stack img {
       width: 100%;
-      height: 100%;
+      flex: 1;
       object-fit: cover;
     }
 
-    .gallery-grid-2x2 .img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background-color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.15);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .gallery-bottom {
+    .gallery-row-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
@@ -235,23 +206,10 @@
       margin: 16px auto 0;
     }
 
-    .gallery-bottom img {
+    .gallery-row-2 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .gallery-bottom .img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background-color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.15);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
     /* ========== FOOTER ========== */
@@ -296,9 +254,8 @@
         width: 100%;
       }
 
-      .gallery-grid-2col,
-      .gallery-grid-2x2,
-      .gallery-bottom {
+      .gallery-row-1,
+      .gallery-row-2 {
         grid-template-columns: 1fr;
       }
 
@@ -326,7 +283,7 @@
       <li><a href="mdanderson.html" class="active">MD Anderson</a></li>
       <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
       <li><a href="engineering-design.html">Engineering Design</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#about">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
@@ -348,10 +305,7 @@
         </p>
       </div>
       <div class="intro-logo">
-        <!--
-          REPLACE: <img src="images/mdanderson-logo.png" alt="MD Anderson Cancer Center">
-        -->
-        <div class="placeholder">MD Anderson Logo</div>
+        <img src="images/mdanderson-logo.png" alt="MD Anderson Cancer Center">
       </div>
     </div>
   </section>
@@ -362,42 +316,19 @@
   <!-- ========== IMAGE GALLERY ========== -->
   <section class="gallery-section">
 
-    <!-- Row 1: 2 images side by side -->
-    <div class="gallery-grid-2col">
-      <!--
-        REPLACE: <img src="images/mda-surgery.jpg" alt="Surgery observation">
-      -->
-      <div class="img-placeholder">Surgery photo</div>
-      <!--
-        REPLACE: <img src="images/mda-cad-renders.jpg" alt="CAD renders of retractor">
-      -->
-      <div class="img-placeholder">CAD renders</div>
+    <!-- Row 1: tall photo left, 2 wide photos stacked right -->
+    <div class="gallery-row-1">
+      <img src="images/mda-1.jpg" alt="Surgery observation" class="gallery-tall">
+      <div class="gallery-stack">
+        <img src="images/mda-2.jpg" alt="CAD renders of retractor">
+        <img src="images/mda-3.jpg" alt="Mold and prototype">
+      </div>
     </div>
 
-    <!-- Row 2: 2x2 grid of process photos -->
-    <div class="gallery-grid-2x2">
-      <!--
-        REPLACE each placeholder with:
-        <img src="images/mda-retractor.jpg" alt="Retractor closeup">
-        <img src="images/mda-mold.jpg" alt="Mold and prototype">
-        <img src="images/mda-workspace.jpg" alt="Workspace">
-        <img src="images/mda-fitting.jpg" alt="Prototype fitting">
-      -->
-      <div class="img-placeholder">Retractor closeup</div>
-      <div class="img-placeholder">Mold &amp; prototype</div>
-      <div class="img-placeholder">Workspace</div>
-      <div class="img-placeholder">Prototype fitting</div>
-    </div>
-
-    <!-- Row 3: 2 more images -->
-    <div class="gallery-bottom">
-      <!--
-        REPLACE:
-        <img src="images/mda-glove-test.jpg" alt="Glove prototype test">
-        <img src="images/mda-hand-cast.jpg" alt="Hand casting process">
-      -->
-      <div class="img-placeholder">Glove prototype test</div>
-      <div class="img-placeholder">Hand casting process</div>
+    <!-- Row 2: 2 tall photos side by side -->
+    <div class="gallery-row-2">
+      <img src="images/mda-4.jpg" alt="Glove prototype">
+      <img src="images/mda-5.jpg" alt="Retractor grip test">
     </div>
 
   </section>
