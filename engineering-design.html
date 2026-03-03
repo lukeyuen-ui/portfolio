@@ -110,20 +110,6 @@
       object-fit: cover;
     }
 
-    /* Placeholder for hero background */
-    .hero-bg-placeholder {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #5a7a9a 0%, #7a9ab0 30%, #8aaa c0 60%, #6a8a a0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.15);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -170,6 +156,7 @@
     .course-card {
       display: flex;
       flex-direction: column;
+      height: 100%;
     }
 
     .course-card-image {
@@ -224,6 +211,7 @@
       letter-spacing: 0.02em;
       transition: background-color 0.3s ease, color 0.3s ease;
       align-self: flex-start;
+      margin-top: auto;
     }
 
     .course-card .btn:hover {
@@ -286,18 +274,14 @@
       <li><a href="mdanderson.html">MD Anderson</a></li>
       <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
       <li><a href="engineering-design.html" class="active">Engineering Design</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#about">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
   <!-- ========== HERO ========== -->
   <section class="hero">
-    <!--
-      REPLACE the placeholder with your Rice University campus photo:
-      <img class="hero-bg" src="images/rice-campus.jpg" alt="Rice University campus">
-    -->
-    <div class="hero-bg-placeholder">Replace with Rice campus image</div>
+    <img class="hero-bg" src="images/rice-campus.jpg" alt="Rice University campus">
     <div class="hero-overlay"></div>
     <div class="hero-text">
       <h1>Blending creativity and engineering, the EDES minor equips students to turn bold ideas into tangible, human-centered solutions</h1>
@@ -313,10 +297,7 @@
       <!-- EDES 120 -->
       <div class="course-card">
         <div class="course-card-image">
-          <!--
-            REPLACE: <img src="images/edes120.jpg" alt="Hamstring Stretch Device">
-          -->
-          <div class="placeholder">EDES 120 image</div>
+          <img src="images/edes120.jpg" alt="Hamstring Stretch Device">
         </div>
         <h3>EDES 120: Hamstring Stretch Device</h3>
         <p>
@@ -333,10 +314,7 @@
       <!-- EDES 200 -->
       <div class="course-card">
         <div class="course-card-image">
-          <!--
-            REPLACE: <img src="images/edes200.jpg" alt="Negative Pressure Wound Therapy">
-          -->
-          <div class="placeholder">EDES 200 image</div>
+          <img src="images/edes200.jpg" alt="Negative Pressure Wound Therapy">
         </div>
         <h3>EDES 200: Negative Pressure Wound Therapy</h3>
         <p>
@@ -353,10 +331,7 @@
       <!-- EDES 210 -->
       <div class="course-card">
         <div class="course-card-image">
-          <!--
-            REPLACE: <img src="images/edes210.jpg" alt="Prototyping and Fabrication">
-          -->
-          <div class="placeholder">EDES 210 image</div>
+          <img src="images/edes210.jpg" alt="Prototyping and Fabrication">
         </div>
         <h3>EDES 210: Prototyping and Fabrication</h3>
         <p>
