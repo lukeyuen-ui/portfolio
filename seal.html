@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S.E.A.L. Team 6 — ME 326 Collaborative Robotics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:     #0f1117;
+      --ink-mid: #3a3d47;
+      --ink-soft:#7a7e8a;
+      --bg:      #f8f7f4;
+      --surface: #ffffff;
+      --accent:  #8B1A1A;
+      --accent-light: #b83232;
+      --rule:    #e2e0db;
+      --mono-bg: #f0eeea;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 58px;
+    }
+    .nav-back {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink-mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back::before { content: '←'; font-size: 1rem; }
+    .nav-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+      position: relative;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: var(--rule);
+    }
+    .hero-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink-mid);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+      max-width: 480px;
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .meta-item { }
+    .meta-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.2rem;
+    }
+    .meta-value {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-right {
+      position: relative;
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      display: block;
+    }
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(139,26,26,0.35) 0%, rgba(15,17,23,0.5) 100%);
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      background: rgba(248,247,244,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .hero-badge strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    /* ── SECTION WRAPPERS ── */
+    .section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section:last-of-type { border-bottom: none; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--accent);
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── TASKS ── */
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .task-card {
+      background: var(--surface);
+      padding: 2.4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: background 0.2s;
+    }
+    .task-card:hover { background: #fcfbf8; }
+    .task-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .task-op {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .task-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .task-desc {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+    .task-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      margin-top: auto;
+      border-radius: 2px;
+      opacity: 0.92;
+    }
+    .task-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--mono-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── SYSTEM / PIPELINE ── */
+    .pipeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .pipeline-nodes {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pipeline-node {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .pipeline-node:first-child { border-top: 1px solid var(--rule); }
+    .node-dot {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.55rem;
+    }
+    .node-body { }
+    .node-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.02em;
+    }
+    .node-file {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: #f5eded;
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+    .node-desc {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .pipeline-arch {
+      position: sticky;
+      top: 80px;
+    }
+    .arch-img {
+      width: 100%;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
+    .arch-caption {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      margin-top: 0.8rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ── FLOWCHART SECTION ── */
+    .flowchart-wrap {
+      margin-top: 3rem;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      background: white;
+    }
+    .flowchart-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── RESULTS ── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .result-cell {
+      background: var(--surface);
+      padding: 2rem;
+    }
+    .result-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .result-label {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+
+    /* ── LINKS / CTA ── */
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--ink); color: white; }
+
+    /* ── TEAM STRIP ── */
+    .team-strip {
+      background: var(--ink);
+      color: white;
+      padding: 4rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .team-strip-left { max-width: 480px; }
+    .team-strip-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.8rem;
+    }
+    .team-strip-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .team-strip-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .btn-white {
+      background: white;
+      color: var(--ink);
+      border: 1px solid white;
+    }
+    .btn-white:hover { background: var(--bg); border-color: var(--bg); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--rule);
+      padding: 2rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+    }
+    footer a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.65s ease forwards;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.22s; }
+    .delay-3 { animation-delay: 0.36s; }
+    .delay-4 { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 50vw; }
+      .hero-left { padding: 3rem 2rem; }
+      .container { padding: 0 2rem; }
+      .tasks-grid, .results-grid { grid-template-columns: 1fr; }
+      .pipeline { grid-template-columns: 1fr; }
+      .team-strip { flex-direction: column; padding: 3rem 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-back" href="https://lukeyuen-ui.github.io/portfolio/">Luke Yuen</a>
+    <span class="nav-title">S.E.A.L. Team 6</span>
+    <ul class="nav-links">
+      <li><a href="#tasks">Tasks</a></li>
+      <li><a href="#system">System</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag fade-up delay-1">ME 326 · Stanford University · Winter 2026</p>
+      <h1 class="hero-title fade-up delay-2">S.E.A.L.<br>Team 6</h1>
+      <p class="hero-subtitle fade-up delay-2">Speech Enabled Autonomous Liquid-handler</p>
+      <p class="hero-desc fade-up delay-3">
+        A voice-commanded mobile robot built on the bimanual TidyBot++ platform.
+        S.E.A.L. listens for natural language commands, navigates to target objects using
+        a YOLO + Gemini vision pipeline, and manipulates them — retrieving items,
+        placing them in containers, and pouring liquids.
+      </p>
+      <div class="hero-meta fade-up delay-4">
+        <div class="meta-item">
+          <div class="meta-label">Platform</div>
+          <div class="meta-value">TidyBot++ / WidowX 250</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Stack</div>
+          <div class="meta-value">ROS 2 · YOLO · Gemini</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Demo Day</div>
+          <div class="meta-value">March 12, 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- Replace src with your actual robot photo -->
+      <img class="hero-image" src="images/seal-hero.jpg"
+           alt="S.E.A.L. TidyBot robot"
+           onerror="this.style.display='none'" />
+      <div class="hero-image-overlay"></div>
+      <div class="hero-badge">
+        <strong>Group 6</strong>
+        Collaborative Robotics
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKS -->
+  <section class="section" id="tasks">
+    <div class="container">
+      <p class="section-label">Operations</p>
+      <h2 class="section-heading">Three Tasks, One Robot</h2>
+      <p style="color:var(--ink-mid); max-width:560px; font-weight:300;">
+        Each task builds on the last, layering speech, vision, navigation,
+        and manipulation into an increasingly complex collaborative pipeline.
+      </p>
+      <div class="tasks-grid">
+        <!-- Task 1 -->
+        <div class="task-card">
+          <span class="task-num">01</span>
+          <span class="task-op">Operation Banana Depot</span>
+          <h3 class="task-name">Object Retrieval</h3>
+          <p class="task-desc">
+            S.E.A.L. receives a spoken command, scans the environment by rotating in place,
+            visually servos toward the target, computes a grasp pose from the bounding box
+            and point cloud, grasps the object, and returns to start.
+          </p>
+          <!-- Replace with your Task 1 photo -->
+          <img class="task-img" src="images/task1.jpg" alt="Task 1 — robot grasping banana"
+               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 1 photo ]</div>'" />
+        </div>
+        <!-- Task 2 -->
+        <div class="task-card">
+          <span class="task-num">02</span>
+          <span class="task-op">Operation Banana Depot</span>
+          <h3 class="task-name">Sequential Place</h3>
+          <p class="task-desc">
+            Extends Task 1 with a second navigation leg: after retrieving the object, the robot
+            identifies a verbally-specified destination container, navigates toward it via
+            visual servo, and deposits the payload inside.
+          </p>
+          <img class="task-img" src="images/task2.jpg" alt="Task 2 — banana placed in bowl"
+               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 2 photo ]</div>'" />
+        </div>
+        <!-- Task 3 -->
+        <div class="task-card">
+          <span class="task-num">03</span>
+          <span class="task-op">Operation Bottoms Up</span>
+          <h3 class="task-name">Liquid Pouring</h3>
+          <p class="task-desc">
+            The team's self-designed challenge. S.E.A.L. locates a bottle via Gemini vision,
+            executes a side-grasp, lifts it to a stowed pose using a two-arm control loop,
+            and pours the contents into a target cup.
+          </p>
+          <img class="task-img" src="images/task3.jpg" alt="Task 3 — robot with bottle"
+               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 3 photo ]</div>'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS STRIP -->
+  <div class="results-grid" style="margin:0; border-left:none; border-right:none; border-radius:0;">
+    <div class="result-cell">
+      <div class="result-num">3</div>
+      <div class="result-label">Tasks designed<br>and executed</div>
+    </div>
+    <div class="result-cell">
+      <div class="result-num">8</div>
+      <div class="result-label">ROS 2 nodes in<br>the pipeline</div>
+    </div>
+    <div class="result-cell">
+      <div class="result-num">6+</div>
+      <div class="result-label">Weeks of hardware<br>development</div>
+    </div>
+  </div>
+
+  <!-- SYSTEM -->
+  <section class="section" id="system">
+    <div class="container">
+      <p class="section-label">Architecture</p>
+      <h2 class="section-heading">How It Works</h2>
+      <div class="pipeline">
+        <div class="pipeline-nodes">
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Brain Node</div>
+              <div class="node-file">brain_node_task1/2.py</div>
+              <div class="node-desc">Central orchestrator. Runs the task state machine, publishes goals to each subsystem node, and listens for status updates via ROS 2 pub/sub. No node calls another node's functions directly.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Speech Node</div>
+              <div class="node-file">speech_node.py</div>
+              <div class="node-desc">Records audio from the robot's microphone, transcribes it to text (Task 1) or structured JSON with payload and destination fields (Task 2) using a speech-to-text API.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Vision Node</div>
+              <div class="node-file">vision_yolo_gemini.py</div>
+              <div class="node-desc">Dual-model perception: YOLOv8 for fast detection of known objects, Gemini for open-vocabulary queries. Publishes pixel centroid and bounding box ROI to the navigator and grasp planner.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Navigator Node</div>
+              <div class="node-file">navigator.py</div>
+              <div class="node-desc">Visual-servo state machine: SCAN → APPROACH → FINE_CENTER → CAMERA_RESET → FINAL_APPROACH. Uses proportional control on pixel error to align and advance toward the target.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Grasp Planner Node</div>
+              <div class="node-file">simple_grasp_planner_node.py</div>
+              <div class="node-desc">Computes a top-down grasp pose from the depth point cloud ROI. Uses PCA on the foreground point cluster to determine object orientation and generates a PoseStamped in the robot's base frame.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Manipulation Node</div>
+              <div class="node-file">manipulation_node.py</div>
+              <div class="node-desc">Receives target poses from the grasp planner, commands the WidowX 250 arm via Interbotix API to execute grab, stow, deposit, and release actions.</div>
+            </div>
+          </div>
+        </div>
+        <div class="pipeline-arch">
+          <!-- Replace src with your actual ROS architecture diagram -->
+          <img class="arch-img" src="images/ros-architecture.jpg"
+               alt="ROS 2 node architecture diagram"
+               onerror="this.style.border='1px solid var(--rule)'; this.style.padding='2rem'; this.style.background='var(--mono-bg)'; this.alt='[ ROS architecture diagram ]'" />
+          <p class="arch-caption">ROS 2 node graph — Brain Node orchestrates all subsystems via pub/sub topics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW SECTION -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Control Flow</p>
+      <h2 class="section-heading">Task Flowcharts</h2>
+      <p style="color:var(--ink-mid); max-width:560px; font-weight:300; margin-bottom:2rem;">
+        Each task runs an independent brain node state machine. Task 2 extends Task 1 with
+        a second navigation-and-deposit cycle after the initial retrieval.
+      </p>
+      <div class="flowchart-wrap">
+        <!-- Drop in the SVG flowchart exported from this conversation, or the screenshot -->
+        <img src="images/flowchart.svg" alt="Task 1 and Task 2 flowchart"
+             onerror="this.style.padding='3rem 2rem'; this.style.display='block'; this.style.textAlign='center'; this.alt='[ Flowchart — see Design & Methods page ]'" />
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-outline" href="https://sites.google.com/stanford.edu/me326-group-6/design-methods" target="_blank">
+          View Full Design &amp; Methods ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM / CTA -->
+  <div class="team-strip" id="team">
+    <div class="team-strip-left">
+      <p class="team-strip-label">S.E.A.L. Team 6 · ME 326</p>
+      <h2 class="team-strip-heading">See the full project website</h2>
+      <p class="team-strip-desc">
+        The team site includes demo videos, detailed methodology, our software development
+        writeup, and individual team member bios. Built on Google Sites as part of the
+        ME 326 Collaborative Robotics course portfolio requirement.
+      </p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0.8rem; align-items:flex-start;">
+      <a class="btn btn-white" href="https://sites.google.com/stanford.edu/me326-group-6/home" target="_blank">
+        Team Website ↗
+      </a>
+      <a class="btn btn-outline" style="border-color:rgba(255,255,255,0.3); color:white;" href="https://github.com/AndrewPasco/collaborative-robotics-2026-group6" target="_blank">
+        GitHub Repo ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>ME 326 · Stanford University · Winter 2026</span>
+    <a href="https://lukeyuen-ui.github.io/portfolio/">← Back to Portfolio</a>
+  </footer>
+
+</body>
+</html>
