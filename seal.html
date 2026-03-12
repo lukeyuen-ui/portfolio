@@ -692,6 +692,7 @@
       .tasks-grid, .results-grid { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: 1fr; }
       .team-strip { flex-direction: column; padding: 3rem 2rem; }
+      .flowchart-side-by-side { grid-template-columns: 1fr !important; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .nav-links {
         display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -962,18 +963,36 @@
     <div class="container">
       <p class="section-label">Control Flow</p>
       <h2 class="section-heading">Task Flowcharts</h2>
-      <p style="color:var(--ink-mid); max-width:560px; font-weight:300; margin-bottom:2rem;">
-        Each task runs an independent brain node state machine. Task 2 extends Task 1 with
-        a second navigation-and-deposit cycle after the initial retrieval.
-      </p>
-      <div class="flowchart-wrap">
-        <img src="images/flowchart.svg" alt="Task 1 and Task 2 flowchart"
-             onerror="this.style.padding='3rem 2rem'; this.style.display='block'; this.style.textAlign='center'; this.alt='[ Flowchart — see Design & Methods page ]'" />
-      </div>
-      <div class="cta-row">
-        <a class="btn btn-outline" href="https://sites.google.com/stanford.edu/me326-group-6/design-methods" target="_blank">
-          View Full Design &amp; Methods ↗
-        </a>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; margin-top:2rem; align-items:start;">
+
+        <div>
+          <p style="font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.6rem;">Tasks 1 &amp; 2</p>
+          <p style="color:var(--ink-mid); font-weight:300; font-size:0.92rem; line-height:1.65; margin-bottom:1.2rem;">
+            Both tasks share a core loop: speech command → object detection via rotating scan →
+            visual servo approach → grasp planning → manipulation. Task 2 adds a second
+            navigation-and-deposit cycle after the initial retrieval, re-running the control
+            loop to locate the destination container and place the payload inside.
+          </p>
+          <div class="flowchart-wrap" style="margin-top:0;">
+            <img src="images/flowchart-task12.png" alt="Task 1 and Task 2 flowchart"
+                 onerror="this.style.padding='3rem 2rem'; this.alt='[ Task 1 &amp; 2 flowchart ]'" />
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.6rem;">Task 3</p>
+          <p style="color:var(--ink-mid); font-weight:300; font-size:0.92rem; line-height:1.65; margin-bottom:1.2rem;">
+            The self-designed liquid pouring challenge uses the same perception backbone but
+            diverges at manipulation: after locating the bottle via Gemini, the robot plans
+            a side-grasp, coordinates a two-arm lift to a stowed pose, and runs an
+            Arm 2 control loop to tilt and pour into the target cup before returning to done.
+          </p>
+          <div class="flowchart-wrap" style="margin-top:0;">
+            <img src="images/flowchart-task3.png" alt="Task 3 flowchart"
+                 onerror="this.style.padding='3rem 2rem'; this.alt='[ Task 3 flowchart ]'" />
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
