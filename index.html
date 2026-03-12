@@ -85,8 +85,8 @@
       text-align: center; margin-bottom: 50px;
     }
     .projects-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 30px; max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); /* ← updated from 4 to 5 */
+      gap: 30px; max-width: 1400px; margin: 0 auto;
     }
     .project-card {
       text-align: center; cursor: pointer; transition: transform 0.3s ease;
@@ -94,7 +94,7 @@
     .project-card:hover { transform: translateY(-4px); }
     .project-image-circle {
       width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
-      background-color: #c8c8c8; margin: 0 auto 20px; max-width: 260px;
+      background-color: #c8c8c8; margin: 0 auto 20px; max-width: 220px; /* ← slightly smaller to fit 5 */
       display: flex; align-items: center; justify-content: center;
     }
     .project-image-circle img {
@@ -102,9 +102,9 @@
     }
     .project-card h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem; font-weight: 500; margin-bottom: 6px;
+      font-size: 1.15rem; font-weight: 500; margin-bottom: 6px; /* ← slightly tighter */
     }
-    .project-card p { font-size: 0.9rem; font-weight: 300; color: #555; }
+    .project-card p { font-size: 0.85rem; font-weight: 300; color: #555; }
 
     .about-section { padding: 80px 40px; background-color: #f0f0f0; }
     .about-inner {
@@ -140,6 +140,9 @@
       font-size: 0.85rem; color: #777; border-top: 1px solid #d0d0d0;
     }
 
+    @media (max-width: 1100px) {
+      .projects-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 900px) {
       .nav-links {
         display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -178,6 +181,7 @@
       <li><a href="mdanderson.html">MD Anderson</a></li>
       <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
       <li><a href="engineering-design.html">Engineering Design</a></li>
+      <li><a href="seal.html">S.E.A.L. Team 6</a></li><!-- ← NEW -->
       <li><a href="#about">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -232,6 +236,15 @@
         </div>
         <h3>Engineering Design Minor</h3>
         <p>Human-Centered Engineering</p>
+      </a>
+
+      <!-- ── NEW: S.E.A.L. Team 6 ── -->
+      <a class="project-card" href="seal.html">
+        <div class="project-image-circle">
+          <img src="images/project-seal.png" alt="S.E.A.L. Team 6 — Collaborative Robotics">
+        </div>
+        <h3>ME 326 Robotics</h3>
+        <p>S.E.A.L. Team 6</p>
       </a>
 
     </div>
