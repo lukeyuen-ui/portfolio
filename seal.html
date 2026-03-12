@@ -471,7 +471,7 @@
     /* ── SYSTEM / PIPELINE ── */
     .pipeline {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.4fr;
       gap: 4rem;
       align-items: start;
       margin-top: 3rem;
@@ -528,8 +528,10 @@
     }
     .arch-img {
       width: 100%;
+      max-width: 100%;
       border: 1px solid var(--rule);
       border-radius: 4px;
+      display: block;
     }
     .arch-caption {
       font-size: 0.78rem;
