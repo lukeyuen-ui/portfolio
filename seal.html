@@ -754,7 +754,7 @@
       </div>
     </div>
     <div class="hero-right">
-      <img class="hero-image" src="images/seal-hero.jpg"
+      <img class="hero-image" src="images/hero-seal.png"
            alt="S.E.A.L. TidyBot robot"
            onerror="this.style.display='none'" />
       <div class="hero-image-overlay"></div>
@@ -919,7 +919,7 @@
             <div class="node-body">
               <div class="node-name">Vision Node</div>
               <div class="node-file">vision_yolo_gemini.py</div>
-              <div class="node-desc">Dual-model perception: YOLOv8 for fast detection of known objects, Gemini for open-vocabulary queries. Publishes pixel centroid and bounding box ROI to the navigator and grasp planner.</div>
+              <div class="node-desc">Dual-model perception: YOLOv11 for fast detection of known objects, Gemini for open-vocabulary queries. Publishes pixel centroid and bounding box ROI to the navigator and grasp planner.</div>
             </div>
           </div>
           <div class="pipeline-node">
@@ -1017,14 +1017,14 @@
         op: "Operation Banana Depot",
         name: "Object Retrieval",
         desc: "S.E.A.L. receives a spoken command, scans the environment by rotating in place, visually servos toward the target, computes a grasp pose from the bounding box and point cloud, grasps the object, and returns to start.",
-        video: ""   // ← paste Task 1 video URL
+        video: "https://www.youtube.com/embed/dyRdvVjaM8w"   // ← paste Task 1 video URL
       },
       {
         num: "02",
         op: "Operation Banana Depot",
         name: "Sequential Place",
         desc: "Extends Task 1 with a second navigation leg: after retrieving the object, the robot identifies a verbally-specified destination container, navigates toward it via visual servo, and deposits the payload inside.",
-        video: ""   // ← paste Task 2 video URL
+        video: "https://www.youtube.com/embed/GaQQ-4V3nPc"   // ← paste Task 2 video URL
       },
       {
         num: "03",
