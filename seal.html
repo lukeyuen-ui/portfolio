@@ -241,24 +241,36 @@
       letter-spacing: -0.01em;
     }
 
-    /* ── TASKS ── */
+    /* ── TASKS (interactive) ── */
     .tasks-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
+      gap: 24px;
       margin-top: 3rem;
     }
     .task-card {
       background: var(--surface);
+      border: 1px solid var(--rule);
       padding: 2.4rem 2rem;
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
-      transition: background 0.2s;
+      cursor: pointer;
+      transition: transform 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.24s ease;
+      box-shadow: 0 1px 3px rgba(15, 17, 23, 0.04);
+      border-radius: 2px;
     }
-    .task-card:hover { background: #fcfbf8; }
+    .task-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(15, 17, 23, 0.10), 0 4px 12px rgba(15, 17, 23, 0.05);
+      border-color: #cfc3b5;
+    }
+    .task-card:active {
+      transform: translateY(-3px);
+      transition-duration: 0.1s;
+    }
     .task-num {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -293,7 +305,9 @@
       border-radius: 2px;
       opacity: 0.92;
     }
-    .task-placeholder {
+
+    /* Task thumbnail area */
+    .task-thumb {
       width: 100%;
       aspect-ratio: 4/3;
       background: var(--mono-bg);
@@ -302,10 +316,170 @@
       justify-content: center;
       margin-top: auto;
       border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .task-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+    .task-thumb-label {
+      font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
       color: var(--ink-soft);
       letter-spacing: 0.06em;
+      transition: opacity 0.28s ease;
+    }
+    .task-thumb-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 17, 23, 0);
+      transition: background 0.28s ease;
+    }
+    .task-thumb-play svg {
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .task-card:hover .task-thumb-play {
+      background: rgba(15, 17, 23, 0.32);
+    }
+    .task-card:hover .task-thumb-play svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .task-card:hover .task-thumb-label {
+      opacity: 0;
+    }
+
+    /* ── VIDEO OVERLAY ── */
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 17, 23, 0);
+      backdrop-filter: blur(0px);
+      transition: background 0.36s ease, backdrop-filter 0.36s ease;
+      padding: 48px;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .video-overlay.visible {
+      pointer-events: auto;
+      opacity: 1;
+    }
+    .video-overlay.active {
+      background: rgba(15, 17, 23, 0.6);
+      backdrop-filter: blur(12px);
+    }
+    .video-panel {
+      width: 70%;
+      max-width: 960px;
+      background: var(--surface);
+      border-radius: 3px;
+      box-shadow: 0 32px 80px rgba(15, 17, 23, 0.16), 0 8px 24px rgba(15, 17, 23, 0.06);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+      transition: opacity 0.36s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.36s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .video-overlay.active .video-panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .video-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 28px 32px 22px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .video-panel-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .video-panel-op {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .video-panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .video-panel-title .panel-num {
       font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+    .close-btn {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-soft);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .close-btn:hover {
+      color: var(--ink);
+      border-color: var(--ink-mid);
+      background: var(--bg);
+    }
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-wrapper video,
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+    .video-wrapper video { object-fit: contain; }
+    .video-placeholder-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: #5a5047;
+      letter-spacing: 0.06em;
+    }
+    .video-panel-desc {
+      padding: 22px 32px 28px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      font-weight: 300;
+      border-top: 1px solid var(--rule);
     }
 
     /* ── SYSTEM / PIPELINE ── */
@@ -534,6 +708,8 @@
       .team-strip { flex-direction: column; padding: 3rem 2rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .nav-links { display: none; }
+      .video-overlay { padding: 20px; }
+      .video-panel { width: 95%; }
     }
   </style>
 </head>
@@ -578,7 +754,6 @@
       </div>
     </div>
     <div class="hero-right">
-      <!-- Replace src with your actual robot photo -->
       <img class="hero-image" src="images/seal-hero.jpg"
            alt="S.E.A.L. TidyBot robot"
            onerror="this.style.display='none'" />
@@ -598,10 +773,12 @@
       <p style="color:var(--ink-mid); max-width:560px; font-weight:300;">
         Each task builds on the last, layering speech, vision, navigation,
         and manipulation into an increasingly complex collaborative pipeline.
+        Click any card to watch the demo.
       </p>
       <div class="tasks-grid">
+
         <!-- Task 1 -->
-        <div class="task-card">
+        <div class="task-card" onclick="openVideo(0)">
           <span class="task-num">01</span>
           <span class="task-op">Operation Banana Depot</span>
           <h3 class="task-name">Object Retrieval</h3>
@@ -610,12 +787,22 @@
             visually servos toward the target, computes a grasp pose from the bounding box
             and point cloud, grasps the object, and returns to start.
           </p>
-          <!-- Replace with your Task 1 photo -->
-          <img class="task-img" src="images/task1.jpg" alt="Task 1 — robot grasping banana"
-               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 1 photo ]</div>'" />
+          <div class="task-thumb">
+            <img src="images/task1.jpg" alt="Task 1 — robot grasping banana"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="task-thumb-label" style="display:none;">[ task 1 photo ]</span>
+            <!-- Play icon overlay -->
+            <div class="task-thumb-play">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="23" stroke="white" stroke-width="1.5" opacity="0.85"/>
+                <path d="M19 14L35 24L19 34V14Z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
         </div>
+
         <!-- Task 2 -->
-        <div class="task-card">
+        <div class="task-card" onclick="openVideo(1)">
           <span class="task-num">02</span>
           <span class="task-op">Operation Banana Depot</span>
           <h3 class="task-name">Sequential Place</h3>
@@ -624,11 +811,21 @@
             identifies a verbally-specified destination container, navigates toward it via
             visual servo, and deposits the payload inside.
           </p>
-          <img class="task-img" src="images/task2.jpg" alt="Task 2 — banana placed in bowl"
-               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 2 photo ]</div>'" />
+          <div class="task-thumb">
+            <img src="images/task2.jpg" alt="Task 2 — banana placed in bowl"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="task-thumb-label" style="display:none;">[ task 2 photo ]</span>
+            <div class="task-thumb-play">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="23" stroke="white" stroke-width="1.5" opacity="0.85"/>
+                <path d="M19 14L35 24L19 34V14Z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
         </div>
+
         <!-- Task 3 -->
-        <div class="task-card">
+        <div class="task-card" onclick="openVideo(2)">
           <span class="task-num">03</span>
           <span class="task-op">Operation Bottoms Up</span>
           <h3 class="task-name">Liquid Pouring</h3>
@@ -637,12 +834,46 @@
             executes a side-grasp, lifts it to a stowed pose using a two-arm control loop,
             and pours the contents into a target cup.
           </p>
-          <img class="task-img" src="images/task3.jpg" alt="Task 3 — robot with bottle"
-               onerror="this.outerHTML='<div class=\'task-placeholder\'>[ task 3 photo ]</div>'" />
+          <div class="task-thumb">
+            <img src="images/task3.jpg" alt="Task 3 — robot with bottle"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="task-thumb-label" style="display:none;">[ task 3 photo ]</span>
+            <div class="task-thumb-play">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="23" stroke="white" stroke-width="1.5" opacity="0.85"/>
+                <path d="M19 14L35 24L19 34V14Z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
+
+  <!-- VIDEO OVERLAY (shared, populated by JS) -->
+  <div class="video-overlay" id="videoOverlay" onclick="handleOverlayClick(event)">
+    <div class="video-panel">
+      <div class="video-panel-header">
+        <div class="video-panel-meta">
+          <div class="video-panel-op" id="panelOp"></div>
+          <div class="video-panel-title">
+            <span class="panel-num" id="panelNum"></span>
+            <span id="panelName"></span>
+          </div>
+        </div>
+        <button class="close-btn" onclick="closeVideo()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="video-wrapper" id="videoContainer">
+        <!-- Video or placeholder injected here -->
+      </div>
+      <div class="video-panel-desc" id="panelDesc"></div>
+    </div>
+  </div>
 
   <!-- RESULTS STRIP -->
   <div class="results-grid" style="margin:0; border-left:none; border-right:none; border-radius:0;">
@@ -717,7 +948,6 @@
           </div>
         </div>
         <div class="pipeline-arch">
-          <!-- Replace src with your actual ROS architecture diagram -->
           <img class="arch-img" src="images/ros-architecture.jpg"
                alt="ROS 2 node architecture diagram"
                onerror="this.style.border='1px solid var(--rule)'; this.style.padding='2rem'; this.style.background='var(--mono-bg)'; this.alt='[ ROS architecture diagram ]'" />
@@ -737,7 +967,6 @@
         a second navigation-and-deposit cycle after the initial retrieval.
       </p>
       <div class="flowchart-wrap">
-        <!-- Drop in the SVG flowchart exported from this conversation, or the screenshot -->
         <img src="images/flowchart.svg" alt="Task 1 and Task 2 flowchart"
              onerror="this.style.padding='3rem 2rem'; this.style.display='block'; this.style.textAlign='center'; this.alt='[ Flowchart — see Design & Methods page ]'" />
       </div>
@@ -775,6 +1004,89 @@
     <span>ME 326 · Stanford University · Winter 2026</span>
     <a href="https://lukeyuen-ui.github.io/portfolio/">← Back to Portfolio</a>
   </footer>
+
+  <!-- ── VIDEO OVERLAY LOGIC ── -->
+  <script>
+    // ============================================================
+    //  TASK DATA — paste your video URLs here
+    //  Supports direct .mp4 links OR YouTube embed URLs
+    //  e.g. "https://www.youtube.com/embed/VIDEO_ID"
+    // ============================================================
+    const tasks = [
+      {
+        num: "01",
+        op: "Operation Banana Depot",
+        name: "Object Retrieval",
+        desc: "S.E.A.L. receives a spoken command, scans the environment by rotating in place, visually servos toward the target, computes a grasp pose from the bounding box and point cloud, grasps the object, and returns to start.",
+        video: ""   // ← paste Task 1 video URL
+      },
+      {
+        num: "02",
+        op: "Operation Banana Depot",
+        name: "Sequential Place",
+        desc: "Extends Task 1 with a second navigation leg: after retrieving the object, the robot identifies a verbally-specified destination container, navigates toward it via visual servo, and deposits the payload inside.",
+        video: ""   // ← paste Task 2 video URL
+      },
+      {
+        num: "03",
+        op: "Operation Bottoms Up",
+        name: "Liquid Pouring",
+        desc: "The team\u2019s self-designed challenge. S.E.A.L. locates a bottle via Gemini vision, executes a side-grasp, lifts it to a stowed pose using a two-arm control loop, and pours the contents into a target cup.",
+        video: ""   // ← paste Task 3 video URL
+      }
+    ];
+
+    const overlay   = document.getElementById('videoOverlay');
+    const container = document.getElementById('videoContainer');
+
+    function openVideo(idx) {
+      const t = tasks[idx];
+
+      // Populate header
+      document.getElementById('panelOp').textContent   = t.op;
+      document.getElementById('panelNum').textContent   = t.num;
+      document.getElementById('panelName').textContent  = t.name;
+      document.getElementById('panelDesc').textContent  = t.desc;
+
+      // Build video or placeholder
+      if (t.video) {
+        if (t.video.includes('youtube.com') || t.video.includes('youtu.be')) {
+          container.innerHTML = '<iframe src="' + t.video + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        } else {
+          container.innerHTML = '<video controls autoplay><source src="' + t.video + '"></video>';
+        }
+      } else {
+        container.innerHTML = '<span class="video-placeholder-text">[ task ' + (idx + 1) + ' video ]</span>';
+      }
+
+      // Animate in
+      overlay.classList.add('visible');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          overlay.classList.add('active');
+        });
+      });
+
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideo() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(function () {
+        overlay.classList.remove('visible');
+        container.innerHTML = '';
+      }, 380);
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === overlay) closeVideo();
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('visible')) closeVideo();
+    });
+  </script>
 
 </body>
 </html>
