@@ -80,6 +80,26 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
+    .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px; background-color: var(--bg);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; }
+    .nav-logo a { text-decoration: none; color: inherit; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 400; color: var(--ink-mid); position: relative; text-decoration: none; }
+    .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 0; height: 1px; background-color: var(--ink); transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { text-decoration: underline; text-underline-offset: 4px; }
+    .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; }
+    .footer { padding: 40px; text-align: center; background-color: var(--bg); font-size: 0.85rem; color: var(--ink-soft); border-top: 1px solid var(--rule); }
+
     /* ── HERO ── */
     .hero {
       min-height: 82vh;
@@ -707,7 +727,14 @@
       .pipeline { grid-template-columns: 1fr; }
       .team-strip { flex-direction: column; padding: 3rem 2rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--bg); flex-direction: column;
+        padding: 20px 40px; gap: 16px; border-bottom: 1px solid var(--rule);
+      }
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: block; }
+      .nav { padding: 16px 20px; }
       .video-overlay { padding: 20px; }
       .video-panel { width: 95%; }
     }
@@ -716,15 +743,22 @@
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a class="nav-back" href="https://lukeyuen-ui.github.io/portfolio/">Luke Yuen</a>
-    <span class="nav-title">S.E.A.L. Team 6</span>
-    <ul class="nav-links">
-      <li><a href="#tasks">Tasks</a></li>
-      <li><a href="#system">System</a></li>
-      <li><a href="#team">Team</a></li>
-    </ul>
-  </nav>
+ <nav class="nav">
+  <div class="nav-logo"><a href="index.html">Luke Yuen's Portfolio</a></div>
+  <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="vacutrac.html">VacuTrac Surgical</a></li>
+    <li><a href="mdanderson.html">MD Anderson</a></li>
+    <li><a href="imaging-lab.html">Rice Computational Imaging Lab</a></li>
+    <li><a href="engineering-design.html">Engineering Design</a></li>
+    <li><a href="seal.html" class="active">S.E.A.L. Team 6</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
 
   <!-- HERO -->
   <section class="hero">
@@ -1000,9 +1034,8 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
-    <span>ME 326 · Stanford University · Winter 2026</span>
-    <a href="https://lukeyuen-ui.github.io/portfolio/">← Back to Portfolio</a>
+  <footer class="footer">
+    &copy; 2026 Luke Yuen. All rights reserved.
   </footer>
 
   <!-- ── VIDEO OVERLAY LOGIC ── -->
