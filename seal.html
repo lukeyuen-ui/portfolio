@@ -918,7 +918,7 @@
             <div class="node-body">
               <div class="node-name">Point Cloud Node</div>
               <div class="node-file">point_cloud_node.py</div>
-              <div class="node-desc">Converts the depth image from /camera/depth/image_raw into a full-scene PointCloud2 on /camera/points using the camera intrinsics. Activates on "final_approach" from /brain/navigation_status and deactivates on "done" from /brain/manipulation_status.</div>
+              <div class="node-desc">Converts /camera/depth/image_raw into a full-scene PointCloud2 on /camera/points using the camera intrinsics. Runs only during final approach — activating on navigation_status and shutting down once manipulation_status signals done.</div>
             </div>
           </div>
           <div class="pipeline-node">
