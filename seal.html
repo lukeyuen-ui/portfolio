@@ -865,7 +865,7 @@
       <div class="result-label">Tasks designed<br>and executed</div>
     </div>
     <div class="result-cell">
-      <div class="result-num">6</div>
+      <div class="result-num">7</div>
       <div class="result-label">ROS 2 nodes in<br>the pipeline</div>
     </div>
     <div class="result-cell">
@@ -911,6 +911,14 @@
               <div class="node-name">Navigator Node</div>
               <div class="node-file">navigator.py</div>
               <div class="node-desc">Visual-servo state machine: SCAN → APPROACH → FINE_CENTER → CAMERA_RESET → FINAL_APPROACH. Uses proportional control on pixel error to align and advance toward the target.</div>
+            </div>
+          </div>
+          <div class="pipeline-node">
+            <div class="node-dot"></div>
+            <div class="node-body">
+              <div class="node-name">Point Cloud Node</div>
+              <div class="node-file">point_cloud_node.py</div>
+              <div class="node-desc">Converts the depth image from /camera/depth/image_raw into a full-scene PointCloud2 on /camera/points using the camera intrinsics. Activates on "final_approach" from /brain/navigation_status and deactivates on "done" from /brain/manipulation_status.</div>
             </div>
           </div>
           <div class="pipeline-node">
