@@ -65,16 +65,17 @@
       padding: 40px 40px 20px; letter-spacing: -0.02em;
     }
     .hero-image-wrapper {
-      position: relative; width: 100%;
+      position: relative; width: 100%; aspect-ratio: 2.35 / 1; overflow: hidden;
     }
     .hero-image {
-      width: 100%; height: auto; display: block;
+      width: 100%; height: 100%; object-fit: cover; object-position: center 42%;
+      display: block;
     }
     .hero-overlay-text {
-      position: absolute; bottom: 0; left: 0;
-      padding: 30px 40px; max-width: 420px;
-      color: #1a1a1a; font-size: 0.95rem; line-height: 1.6; font-weight: 400;
-      background-color: rgba(255, 255, 255, 0.75);
+      position: absolute; bottom: 24px; left: 0;
+      padding: 0 40px; max-width: 42%;
+      color: #1a1a1a; font-size: clamp(0.85rem, 1.6vw, 1.15rem); line-height: 1.6; font-weight: 400;
+      text-shadow: 0 1px 12px rgba(255, 255, 255, 0.6), 0 1px 3px rgba(255, 255, 255, 0.6);
     }
 
     .projects-section {
@@ -157,7 +158,8 @@
       .about-photo { flex: none; width: 250px; height: 310px; }
       .about-buttons { justify-content: center; }
       .hero-title { padding: 30px 20px 16px; }
-      .hero-overlay-text { padding: 16px 20px; font-size: 0.8rem; max-width: 70%; line-height: 1.5; }
+      .hero-image-wrapper { aspect-ratio: 1.3 / 1; }
+      .hero-overlay-text { bottom: 14px; padding: 0 20px; max-width: 55%; line-height: 1.45; }
       .hero { margin: 0 20px; }
       .nav { padding: 16px 20px; }
       .projects-section, .about-section { padding: 60px 20px; }
