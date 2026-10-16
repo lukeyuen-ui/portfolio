@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S.E.A.L. Team 6 — ME 326 Collaborative Robotics</title>
+  <title>S.E.A.L. Team 6 | ME 326 Collaborative Robotics</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -719,8 +719,8 @@
       <p class="hero-desc fade-up delay-3">
         A voice-commanded mobile robot built on the bimanual TidyBot++ platform.
         S.E.A.L. listens for natural language commands, navigates to target objects using
-        a YOLO + Gemini vision pipeline, and manipulates them — retrieving items,
-        placing them in containers, and pouring liquids.
+        a YOLO + Gemini vision pipeline, and manipulates them. It can retrieve items,
+        place them in containers, and pour liquids.
       </p>
       <div class="hero-meta fade-up delay-4">
         <div class="meta-item">
@@ -771,7 +771,7 @@
             and point cloud, grasps the object, and returns to start.
           </p>
           <div class="task-thumb">
-            <img src="images/task1.jpg" alt="Task 1 — robot grasping banana"
+            <img src="images/task1.jpg" alt="Task 1, robot grasping banana"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="task-thumb-label" style="display:none;">[ task 1 photo ]</span>
             <!-- Play icon overlay -->
@@ -795,7 +795,7 @@
             visual servo, and deposits the payload inside.
           </p>
           <div class="task-thumb">
-            <img src="images/task2.jpg" alt="Task 2 — banana placed in bowl"
+            <img src="images/task2.jpg" alt="Task 2, banana placed in bowl"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="task-thumb-label" style="display:none;">[ task 2 photo ]</span>
             <div class="task-thumb-play">
@@ -815,10 +815,10 @@
           <p class="task-desc">
             The team's self-designed challenge. S.E.A.L. locates a bottle via
             Gemini vision, executes a side-grasp, and lifts it to a stowed pose
-            using a two-arm control loop — laying the groundwork for a full pour sequence.
+            using a two-arm control loop. This lays the groundwork for a full pour sequence.
           </p>
           <div class="task-thumb">
-            <img src="images/task3.jpg" alt="Task 3 — robot with bottle"
+            <img src="images/task3.jpg" alt="Task 3, robot with bottle"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="task-thumb-label" style="display:none;">[ task 3 photo ]</span>
             <div class="task-thumb-play">
@@ -918,7 +918,7 @@
             <div class="node-body">
               <div class="node-name">Point Cloud Node</div>
               <div class="node-file">point_cloud_node.py</div>
-              <div class="node-desc">Converts /camera/depth/image_raw into a full-scene PointCloud2 on /camera/points using the camera intrinsics. Runs only during final approach — activating on navigation_status and shutting down once manipulation_status signals done.</div>
+              <div class="node-desc">Converts /camera/depth/image_raw into a full-scene PointCloud2 on /camera/points using the camera intrinsics. Runs only during final approach. It activates on navigation_status and shuts down once manipulation_status signals done.</div>
             </div>
           </div>
           <div class="pipeline-node">
@@ -942,7 +942,7 @@
           <img class="arch-img" src="images/ros-architecture.jpg"
                alt="ROS 2 node architecture diagram"
                onerror="this.style.border='1px solid var(--rule)'; this.style.padding='2rem'; this.style.background='var(--mono-bg)'; this.alt='[ ROS architecture diagram ]'" />
-          <p class="arch-caption">ROS 2 node graph — Brain Node orchestrates all subsystems via pub/sub topics</p>
+          <p class="arch-caption">ROS 2 node graph. Brain Node orchestrates all subsystems via pub/sub topics</p>
         </div>
       </div>
     </div>
@@ -1016,7 +1016,7 @@
   <!-- ── VIDEO OVERLAY LOGIC ── -->
   <script>
     // ============================================================
-    //  TASK DATA — paste your video URLs here
+    //  TASK DATA. Paste your video URLs here
     //  Supports direct .mp4 links OR YouTube embed URLs
     //  e.g. "https://www.youtube.com/embed/VIDEO_ID"
     // ============================================================
